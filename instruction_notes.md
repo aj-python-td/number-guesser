@@ -22,6 +22,7 @@ I moved the comments from guessing_game.py over here and
 
       a. If the **guess** greater than the **solution**, 
         display to the player "It's lower".
+        
       b. If the **guess** is less than the **solution**, 
         display to the player "It's higher".
 
