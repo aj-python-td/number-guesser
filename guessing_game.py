@@ -7,23 +7,23 @@ def start_game(score_prompt=''):
     print(score_prompt or "Let's play a number guessing game!\n")
     player_name = input('What is your name?:    ')
     print(f'Welcome, {player_name}!\n')
+    print(f'I am thinking of a number between 1 and {UPPER_BOUND}, inclusive.')
     play_game(player_name)
     play_again()
 
 def play_game(player):
     solution = random.randint(1, UPPER_BOUND)
     counter = 0
-    print(f'I am thinking of a number between 1 and {UPPER_BOUND}, inclusive.')
     while True:
         try:
             counter += 1
             guess = int(input('Can you guess my number?:    '))
             if handle_guess(solution, guess) == True:
+                handle_score(player, counter)
                 break
         except ValueError as err:
             counter -= 1
             handle_error(err)
-    handle_score(player, counter)
 
 def handle_guess(correct_answer, player_input):
     if player_input < 1 or player_input > UPPER_BOUND:
@@ -56,7 +56,7 @@ def handle_score(name, score):
 def play_again():
     answer = input('Enter Y to play again, or any other key to exit:    ')
     if answer.lower() == 'y':
-        prompt = f"Let's play again! The High Score is {highscore[1]} by {highscore[0]}\n"
+        prompt = f"Let's play again! The High Score is {highscore[1]} by {highscore[0]}.\n"
         start_game(prompt)
     else:
         print('Thanks for playing!')
